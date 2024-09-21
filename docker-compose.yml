@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env  # Load environment variables from the .env file
+    environment:
+      - DB_NAME=${DB_NAME}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_HOST=db  # Database host pointing to the db service
+      - DB_PORT=5432
+      - REDIS_HOST=redis  # Add Redis host environment variable
+      - REDIS_PORT=6379   # Default Redis port
+    depends_on:
+      - db
+      - redis  # Add Redis dependency
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:latest  # Use the official Redis image
+    ports:
+      - "6379:6379"  # Expose Redis port
+
+# volumes:
+#   postgres_data:
+#   redis_data:

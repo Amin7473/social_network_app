@@ -11,8 +11,8 @@ Ensure you have the following installed:
 
 1. Clone the repository
 
-git clone <repository-url>
-cd <project-directory>
+git clone https://github.com/Amin7473/social_network_app.git
+cd social_network_app
 
 2. Setup .env File
 Create a .env file in the project root with the following environment variables:

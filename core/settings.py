@@ -60,7 +60,8 @@ INSTALLED_APPS = [
     'django_user_agents',   
     'rest_framework',
     'rest_framework_simplejwt',
-    'corsheaders'
+    'corsheaders',
+    'drf_yasg',
 ]
 
 INSTALLED_APPS += CREATED_APPS

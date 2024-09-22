@@ -53,5 +53,12 @@ Follow the prompts to set up the superuser account.
 Open the application in your browser at http://localhost:8000
 Access the Django Admin at http://localhost:8000/admin
 
-7. Redis Integration
+7. Load Postman Collection
+Import the file postman_api_collection.json available in the
+project root directory in Postman and access the APIs and their sample responses
+
+8. Redis Integration
 Redis has been added for caching and rate-limiting tasks. The Redis instance runs on redis://redis:6379.
+
+9. API Documentation
+PDF document for apis in project root directory : API_Documentation.pdf

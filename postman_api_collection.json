@@ -1,0 +1,1543 @@
+{
+	"info": {
+		"_postman_id": "938c4cd6-1aa9-4c73-8387-a8bf584aad16",
+		"name": "Social Network App APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23462003"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"bjones@gmail.com\",\r\n    \"password\" : \"Abcd.1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}accounts/api/authentication/v1/user-login-api/",
+							"host": [
+								"{{host}}accounts"
+							],
+							"path": [
+								"api",
+								"authentication",
+								"v1",
+								"user-login-api",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Error - Invalid creds",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\" : \"user1@gmail.com\",\r\n    \"password\" : \"kxbdbvxcv\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}accounts/api/authentication/v1/user-login-api/",
+									"host": [
+										"{{host}}accounts"
+									],
+									"path": [
+										"api",
+										"authentication",
+										"v1",
+										"user-login-api",
+										""
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 21 Sep 2024 20:57:14 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.15"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "WWW-Authenticate",
+									"value": "Bearer realm=\"api\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, origin"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"No active account found with the given credentials\"\n}"
+						},
+						{
+							"name": "Error - Rate limit exceeded",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\" : \"user1@gmail.com\",\r\n    \"password\" : \"Amin@0108\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}accounts/api/authentication/v1/user-login-api/",
+									"host": [
+										"{{host}}accounts"
+									],
+									"path": [
+										"api",
+										"authentication",
+										"v1",
+										"user-login-api",
+										""
+									]
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 21 Sep 2024 20:57:53 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.15"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Retry-After",
+									"value": "8"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, origin"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "68"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"Request was throttled. Expected available in 8 seconds.\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\" : \"user1@gmail.com\",\r\n    \"password\" : \"Amin@0108\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}accounts/api/authentication/v1/user-login-api/",
+									"host": [
+										"{{host}}accounts"
+									],
+									"path": [
+										"api",
+										"authentication",
+										"v1",
+										"user-login-api",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 21 Sep 2024 20:58:25 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.15"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, origin"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "582"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyNzAzODcwNSwiaWF0IjoxNzI2OTUyMzA1LCJqdGkiOiI4NDI0ZTc2NDE2ODE0MTQ4ODMwZDM2NDE3MzA2NjQwMyIsInVzZXJfaWQiOiJkMTk0YzFjMi03ODViLTExZWYtYmYxNi0wMjQyYWMxZDAwMDQifQ.lC6PhLRAJuTu4RgQKdePkvEwb64m4-Q0yTJuUGwOWGM\",\n    \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI2OTUzMjA1LCJpYXQiOjE3MjY5NTIzMDUsImp0aSI6ImIyNjlhNTA0NzhlYTQ4M2JhY2YzNTBlMzQwMGYxNjQ4IiwidXNlcl9pZCI6ImQxOTRjMWMyLTc4NWItMTFlZi1iZjE2LTAyNDJhYzFkMDAwNCJ9.Gw5wWvRaaZD79MQRnR-63plKBWA8DTmFCkPa64m-2Xk\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Token Refresh",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refresh\" : \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyNzAzOTAwMSwiaWF0IjoxNzI2OTUyNjAxLCJqdGkiOiI3MTYxYWY0ZjhkZmY0ZjYyODhmMjhhYWU3YjRiODViNCIsInVzZXJfaWQiOiJkMTk0YzFjMi03ODViLTExZWYtYmYxNi0wMjQyYWMxZDAwMDQifQ.aoY2gWrkYCZ7dKvKT1GoiaKWSxG9ECalwHkgws3ALRY\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}accounts/api/authentication/v1/user-token-refresh-api/",
+							"host": [
+								"{{host}}accounts"
+							],
+							"path": [
+								"api",
+								"authentication",
+								"v1",
+								"user-token-refresh-api",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"refresh\" : \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyNzAzOTAwMSwiaWF0IjoxNzI2OTUyNjAxLCJqdGkiOiI3MTYxYWY0ZjhkZmY0ZjYyODhmMjhhYWU3YjRiODViNCIsInVzZXJfaWQiOiJkMTk0YzFjMi03ODViLTExZWYtYmYxNi0wMjQyYWMxZDAwMDQifQ.aoY2gWrkYCZ7dKvKT1GoiaKWSxG9ECalwHkgws3ALRY\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}accounts/api/authentication/v1/user-token-refresh-api/",
+									"host": [
+										"{{host}}accounts"
+									],
+									"path": [
+										"api",
+										"authentication",
+										"v1",
+										"user-token-refresh-api",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 21 Sep 2024 21:04:29 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.15"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, origin"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "582"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI2OTUzNTY5LCJpYXQiOjE3MjY5NTI2MDEsImp0aSI6ImRkNDYwMzZlNGQ2ZDQzMTE5ZTEzZWE3MzJmM2E2ZmJmIiwidXNlcl9pZCI6ImQxOTRjMWMyLTc4NWItMTFlZi1iZjE2LTAyNDJhYzFkMDAwNCJ9.T_x1nYi6cD383EPshAWlZz2cnHU5A5if6JYUokNUYDY\",\n    \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyNzAzOTA2OSwiaWF0IjoxNzI2OTUyNjY5LCJqdGkiOiIyZWU2ZWIwNTE2MmE0ZmQ1YmNiMDg2ZjFhY2UxMjY3YiIsInVzZXJfaWQiOiJkMTk0YzFjMi03ODViLTExZWYtYmYxNi0wMjQyYWMxZDAwMDQifQ.J_YJoMPzk0mKxGrvRCbIGaYQfd8voYHbdK4JQP9crtk\"\n}"
+						}
+					]
+				},
+				{
+					"name": "User Registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"mark@gmail.com\",\r\n    \"username\" : \"Mark Zo\",\r\n    \"role\" : \"ADMIN\",         // role enums : READ, WRITE, ADMIN\r\n    \"password\" : \"Abcd.12345\",\r\n    \"confirm_password\" : \"Abcd.12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}accounts/api/authentication/v1/user-registration-api/",
+							"host": [
+								"{{host}}accounts"
+							],
+							"path": [
+								"api",
+								"authentication",
+								"v1",
+								"user-registration-api",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\" : \"user1@gmail.com\",\r\n    \"password\" : \"Amin@0108\",\r\n    \"confirm_password\" : \"Amin@0108\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}accounts/api/authentication/v1/user-registration-api/",
+									"host": [
+										"{{host}}accounts"
+									],
+									"path": [
+										"api",
+										"authentication",
+										"v1",
+										"user-registration-api",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 21 Sep 2024 20:55:22 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.15"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, origin"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "39"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User created successfully\"\n}"
+						},
+						{
+							"name": "Error - email exists",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\" : \"user1@gmail.com\",\r\n    \"password\" : \"Amin@01088\",\r\n    \"confirm_password\" : \"Amin@0108\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}accounts/api/authentication/v1/user-registration-api/",
+									"host": [
+										"{{host}}accounts"
+									],
+									"path": [
+										"api",
+										"authentication",
+										"v1",
+										"user-registration-api",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 21 Sep 2024 20:55:43 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.15"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, origin"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "68"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": {\n        \"email\": [\n            \"user model with this email already exists.\"\n        ]\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "User list - paginated  - 10 records",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI2OTY5MTUyLCJpYXQiOjE3MjY5NjgyNTIsImp0aSI6IjEwNDg4MmQxZjBhODQ0YmJiNTcyNWNiN2NkNmQzYTkxIiwidXNlcl9pZCI6IjllMzgwZWZjLTc4NWYtMTFlZi1hODdlLTAyNDJhYzFkMDAwNCJ9.c5sRc7zXn0Lvsq1hVnZSk-L6PbqeCdxU_6uYyktpXHQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}accounts/api/users/v1/user-list-api/",
+							"host": [
+								"{{host}}accounts"
+							],
+							"path": [
+								"api",
+								"users",
+								"v1",
+								"user-list-api",
+								""
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "bjones@gmail.com",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}accounts/api/users/v1/user-list-api/",
+									"host": [
+										"{{host}}accounts"
+									],
+									"path": [
+										"api",
+										"users",
+										"v1",
+										"user-list-api",
+										""
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "admin",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 21 Sep 2024 21:37:36 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.15"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, origin"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "4162"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"count\": 13,\n    \"next\": \"http://localhost:8000/accounts/api/users/v1/user-list-api/?limit=10&offset=10\",\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": \"aa7ef058-785b-11ef-9e65-0242ac1d0004\",\n            \"created_at\": \"2024-09-21T20:54:17.374423Z\",\n            \"updated_at\": \"2024-09-21T20:54:17.374460Z\",\n            \"username\": \"Admin\",\n            \"email\": \"admin@admin.com\",\n            \"country_code\": null,\n            \"phone_number\": null,\n            \"last_login\": \"2024-09-21T21:05:53.617765Z\",\n            \"role\": \"ADMIN\",\n            \"timezone_info\": null,\n            \"is_staff\": true,\n            \"is_active\": true,\n            \"is_verified\": false,\n            \"is_superuser\": true,\n            \"is_admin\": false,\n            \"groups\": [],\n            \"user_permissions\": []\n        },\n        {\n            \"id\": \"74b15382-785e-11ef-b363-0242ac1d0004\",\n            \"created_at\": \"2024-09-21T21:14:15.181800Z\",\n            \"updated_at\": \"2024-09-21T21:14:15.569148Z\",\n            \"username\": \"Jacob Satham\",\n            \"email\": \"jacob@gmail.com\",\n            \"country_code\": null,\n            \"phone_number\": null,\n            \"last_login\": null,\n            \"role\": \"ADMIN\",\n            \"timezone_info\": null,\n            \"is_staff\": false,\n            \"is_active\": true,\n            \"is_verified\": false,\n            \"is_superuser\": false,\n            \"is_admin\": false,\n            \"groups\": [],\n            \"user_permissions\": []\n        },\n        {\n            \"id\": \"bcff38de-785e-11ef-b363-0242ac1d0004\",\n            \"created_at\": \"2024-09-21T21:16:16.487990Z\",\n            \"updated_at\": \"2024-09-21T21:16:16.939661Z\",\n            \"username\": \"Sadam Karo\",\n            \"email\": \"sadam@gmail.com\",\n            \"country_code\": null,\n            \"phone_number\": null,\n            \"last_login\": null,\n            \"role\": \"WRITE\",\n            \"timezone_info\": null,\n            \"is_staff\": false,\n            \"is_active\": true,\n            \"is_verified\": false,\n            \"is_superuser\": false,\n            \"is_admin\": false,\n            \"groups\": [],\n            \"user_permissions\": []\n        },\n        {\n            \"id\": \"c4c65d04-785e-11ef-b363-0242ac1d0004\",\n            \"created_at\": \"2024-09-21T21:16:29.537071Z\",\n            \"updated_at\": \"2024-09-21T21:16:29.933428Z\",\n            \"username\": \"Stacy Miller\",\n            \"email\": \"stacy@gmail.com\",\n            \"country_code\": null,\n            \"phone_number\": null,\n            \"last_login\": null,\n            \"role\": \"WRITE\",\n            \"timezone_info\": null,\n            \"is_staff\": false,\n            \"is_active\": true,\n            \"is_verified\": false,\n            \"is_superuser\": false,\n            \"is_admin\": false,\n            \"groups\": [],\n            \"user_permissions\": []\n        },\n        {\n            \"id\": \"cf397884-785e-11ef-b363-0242ac1d0004\",\n            \"created_at\": \"2024-09-21T21:16:47.068723Z\",\n            \"updated_at\": \"2024-09-21T21:16:47.469232Z\",\n            \"username\": \"Azak Efron\",\n            \"email\": \"azak@gmail.com\",\n            \"country_code\": null,\n            \"phone_number\": null,\n            \"last_login\": null,\n            \"role\": \"WRITE\",\n            \"timezone_info\": null,\n            \"is_staff\": false,\n            \"is_active\": true,\n            \"is_verified\": false,\n            \"is_superuser\": false,\n            \"is_admin\": false,\n            \"groups\": [],\n            \"user_permissions\": []\n        },\n        {\n            \"id\": \"daa0b052-785e-11ef-b363-0242ac1d0004\",\n            \"created_at\": \"2024-09-21T21:17:06.200221Z\",\n            \"updated_at\": \"2024-09-21T21:17:06.659200Z\",\n            \"username\": \"Wong Lee\",\n            \"email\": \"wong@gmail.com\",\n            \"country_code\": null,\n            \"phone_number\": null,\n            \"last_login\": null,\n            \"role\": \"READ\",\n            \"timezone_info\": null,\n            \"is_staff\": false,\n            \"is_active\": true,\n            \"is_verified\": false,\n            \"is_superuser\": false,\n            \"is_admin\": false,\n            \"groups\": [],\n            \"user_permissions\": []\n        },\n        {\n            \"id\": \"ec7a7d08-785e-11ef-b363-0242ac1d0004\",\n            \"created_at\": \"2024-09-21T21:17:36.148806Z\",\n            \"updated_at\": \"2024-09-21T21:17:56.952824Z\",\n            \"username\": \"Yusa H\",\n            \"email\": \"yusa@gmail.com\",\n            \"country_code\": null,\n            \"phone_number\": null,\n            \"last_login\": null,\n            \"role\": \"READ\",\n            \"timezone_info\": null,\n            \"is_staff\": false,\n            \"is_active\": true,\n            \"is_verified\": false,\n            \"is_superuser\": false,\n            \"is_admin\": false,\n            \"groups\": [],\n            \"user_permissions\": []\n        },\n        {\n            \"id\": \"17ef1ed0-785f-11ef-8fcb-0242ac1d0004\",\n            \"created_at\": \"2024-09-21T21:18:49.055217Z\",\n            \"updated_at\": \"2024-09-21T21:18:49.484910Z\",\n            \"username\": \"Sonic Hedge\",\n            \"email\": \"sonci@gmail.com\",\n            \"country_code\": null,\n            \"phone_number\": null,\n            \"last_login\": null,\n            \"role\": \"WRITE\",\n            \"timezone_info\": null,\n            \"is_staff\": false,\n            \"is_active\": true,\n            \"is_verified\": false,\n            \"is_superuser\": false,\n            \"is_admin\": false,\n            \"groups\": [],\n            \"user_permissions\": []\n        },\n        {\n            \"id\": \"23fb9b36-785f-11ef-8fcb-0242ac1d0004\",\n            \"created_at\": \"2024-09-21T21:19:09.269583Z\",\n            \"updated_at\": \"2024-09-21T21:19:09.730610Z\",\n            \"username\": \"Monica Esre\",\n            \"email\": \"monica@gmail.com\",\n            \"country_code\": null,\n            \"phone_number\": null,\n            \"last_login\": null,\n            \"role\": \"WRITE\",\n            \"timezone_info\": null,\n            \"is_staff\": false,\n            \"is_active\": true,\n            \"is_verified\": false,\n            \"is_superuser\": false,\n            \"is_admin\": false,\n            \"groups\": [],\n            \"user_permissions\": []\n        },\n        {\n            \"id\": \"300c6a86-785f-11ef-8fcb-0242ac1d0004\",\n            \"created_at\": \"2024-09-21T21:19:29.512477Z\",\n            \"updated_at\": \"2024-09-21T21:19:29.915939Z\",\n            \"username\": \"Yusef Imran\",\n            \"email\": \"yusef@gmail.com\",\n            \"country_code\": null,\n            \"phone_number\": null,\n            \"last_login\": null,\n            \"role\": \"WRITE\",\n            \"timezone_info\": null,\n            \"is_staff\": false,\n            \"is_active\": true,\n            \"is_verified\": false,\n            \"is_superuser\": false,\n            \"is_admin\": false,\n            \"groups\": [],\n            \"user_permissions\": []\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Block User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI2OTY5MTUyLCJpYXQiOjE3MjY5NjgyNTIsImp0aSI6IjEwNDg4MmQxZjBhODQ0YmJiNTcyNWNiN2NkNmQzYTkxIiwidXNlcl9pZCI6IjllMzgwZWZjLTc4NWYtMTFlZi1hODdlLTAyNDJhYzFkMDAwNCJ9.c5sRc7zXn0Lvsq1hVnZSk-L6PbqeCdxU_6uYyktpXHQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"block_user_id\" : \"74b15382-785e-11ef-b363-0242ac1d0004\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}accounts/api/users/v1/user-block-unblock-api/",
+							"host": [
+								"{{host}}accounts"
+							],
+							"path": [
+								"api",
+								"users",
+								"v1",
+								"user-block-unblock-api",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unblock user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI2OTYzNTc2LCJpYXQiOjE3MjY5NjI2NzYsImp0aSI6IjQ1MGRkODNjNDkxOTQyNGM5ZGRkYTFiYTg3MGJiMDUwIiwidXNlcl9pZCI6IjllMzgwZWZjLTc4NWYtMTFlZi1hODdlLTAyNDJhYzFkMDAwNCJ9.YEwhmsCot_2zlO5q8YrZObI82HVN5zRvYptlibesZ04",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"unblock_user_id\" : \"74b15382-785e-11ef-b363-0242ac1d0004\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}accounts/api/users/v1/user-block-unblock-api/",
+							"host": [
+								"{{host}}accounts"
+							],
+							"path": [
+								"api",
+								"users",
+								"v1",
+								"user-block-unblock-api",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Friends",
+			"item": [
+				{
+					"name": "Pending friend requests - paginated",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI2OTcwMzEwLCJpYXQiOjE3MjY5Njk0MTAsImp0aSI6Ijk1Yzk5M2IwMWFiODRkMDNhNjEwNzNmODAyMzc4ZTRlIiwidXNlcl9pZCI6ImVjN2E3ZDA4LTc4NWUtMTFlZi1iMzYzLTAyNDJhYzFkMDAwNCJ9.VjapGjPtrChNYnhBC_OG82lGOwnFBh7RD-zpr_3eQc0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}accounts/api/users/v1/pending-friends-requests-api/?ordering=-created_at",
+							"host": [
+								"{{host}}accounts"
+							],
+							"path": [
+								"api",
+								"users",
+								"v1",
+								"pending-friends-requests-api",
+								""
+							],
+							"query": [
+								{
+									"key": "ordering",
+									"value": "-created_at",
+									"description": "enums : -created_at , created_at"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}accounts/api/users/v1/pending-friends-requests-api/?ordering=-created_at",
+									"host": [
+										"{{host}}accounts"
+									],
+									"path": [
+										"api",
+										"users",
+										"v1",
+										"pending-friends-requests-api",
+										""
+									],
+									"query": [
+										{
+											"key": "ordering",
+											"value": "-created_at",
+											"description": "enums : -created_at , created_at"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 22 Sep 2024 00:33:16 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.15"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, origin"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1026"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"count\": 5,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": \"8df6c938-7879-11ef-b94a-0242ac1d0004\",\n            \"sender\": {\n                \"id\": \"8af34a50-785f-11ef-a87e-0242ac1d0004\",\n                \"username\": \"Selena M\",\n                \"email\": \"selena@gmail.com\"\n            },\n            \"created_at\": \"2024-09-22T00:28:14.001059Z\"\n        },\n        {\n            \"id\": \"8a3e92ee-7879-11ef-b94a-0242ac1d0004\",\n            \"sender\": {\n                \"id\": \"9797ee00-785f-11ef-a87e-0242ac1d0004\",\n                \"username\": \"Alex Periera\",\n                \"email\": \"alexp@gmail.com\"\n            },\n            \"created_at\": \"2024-09-22T00:28:07.765786Z\"\n        },\n        {\n            \"id\": \"8570b77e-7879-11ef-b94a-0242ac1d0004\",\n            \"sender\": {\n                \"id\": \"23fb9b36-785f-11ef-8fcb-0242ac1d0004\",\n                \"username\": \"Monica Esre\",\n                \"email\": \"monica@gmail.com\"\n            },\n            \"created_at\": \"2024-09-22T00:27:59.699474Z\"\n        },\n        {\n            \"id\": \"81c94960-7879-11ef-b94a-0242ac1d0004\",\n            \"sender\": {\n                \"id\": \"bcff38de-785e-11ef-b363-0242ac1d0004\",\n                \"username\": \"Sadam Karo\",\n                \"email\": \"sadam@gmail.com\"\n            },\n            \"created_at\": \"2024-09-22T00:27:53.568597Z\"\n        },\n        {\n            \"id\": \"7d66850e-7879-11ef-b94a-0242ac1d0004\",\n            \"sender\": {\n                \"id\": \"c4c65d04-785e-11ef-b363-0242ac1d0004\",\n                \"username\": \"Stacy Miller\",\n                \"email\": \"stacy@gmail.com\"\n            },\n            \"created_at\": \"2024-09-22T00:27:46.211408Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Friends list - paginated",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI2OTcwODQ4LCJpYXQiOjE3MjY5Njk5NDgsImp0aSI6IjUyNDM4YjU5ODU5ZTQwYjA4ODExMDZmMDNlMGE3M2Q3IiwidXNlcl9pZCI6IjllMzgwZWZjLTc4NWYtMTFlZi1hODdlLTAyNDJhYzFkMDAwNCJ9.An917Qc1Yfvjz18WgBMx1PVHSk-tKzFO8V0PbeRp0W8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}accounts/api/users/v1/friends-list-api/",
+							"host": [
+								"{{host}}accounts"
+							],
+							"path": [
+								"api",
+								"users",
+								"v1",
+								"friends-list-api",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}accounts/api/users/v1/friends-list-api/",
+									"host": [
+										"{{host}}accounts"
+									],
+									"path": [
+										"api",
+										"users",
+										"v1",
+										"friends-list-api",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 21 Sep 2024 23:57:11 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.15"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, origin"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "455"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"count\": 1,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": \"74b15382-785e-11ef-b363-0242ac1d0004\",\n            \"created_at\": \"2024-09-21T21:14:15.181800Z\",\n            \"updated_at\": \"2024-09-21T21:14:15.569148Z\",\n            \"username\": \"Jacob Satham\",\n            \"email\": \"jacob@gmail.com\",\n            \"country_code\": null,\n            \"phone_number\": null,\n            \"last_login\": null,\n            \"role\": \"ADMIN\",\n            \"timezone_info\": null,\n            \"is_staff\": false,\n            \"is_active\": true,\n            \"is_verified\": false,\n            \"is_superuser\": false,\n            \"is_admin\": false,\n            \"groups\": [],\n            \"user_permissions\": []\n        }\n    ]\n}"
+						},
+						{
+							"name": "Success - blocked user",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}accounts/api/users/v1/friends-list-api/",
+									"host": [
+										"{{host}}accounts"
+									],
+									"path": [
+										"api",
+										"users",
+										"v1",
+										"friends-list-api",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 22 Sep 2024 01:35:38 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.15"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, origin"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "842"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"count\": 2,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": \"74b15382-785e-11ef-b363-0242ac1d0004\",\n            \"email\": \"-\",\n            \"username\": \"Blocked User\",\n            \"created_at\": \"2024-09-21T21:14:15.181800Z\",\n            \"updated_at\": \"2024-09-21T21:14:15.569148Z\",\n            \"country_code\": null,\n            \"phone_number\": null,\n            \"last_login\": null,\n            \"role\": \"ADMIN\",\n            \"timezone_info\": null,\n            \"is_staff\": false,\n            \"is_active\": true,\n            \"is_verified\": false,\n            \"is_superuser\": false,\n            \"is_admin\": false,\n            \"groups\": [],\n            \"user_permissions\": []\n        },\n        {\n            \"id\": \"8af34a50-785f-11ef-a87e-0242ac1d0004\",\n            \"email\": \"selena@gmail.com\",\n            \"username\": \"Selena M\",\n            \"created_at\": \"2024-09-21T21:22:02.020546Z\",\n            \"updated_at\": \"2024-09-21T21:22:02.491905Z\",\n            \"country_code\": null,\n            \"phone_number\": null,\n            \"last_login\": null,\n            \"role\": \"WRITE\",\n            \"timezone_info\": null,\n            \"is_staff\": false,\n            \"is_active\": true,\n            \"is_verified\": false,\n            \"is_superuser\": false,\n            \"is_admin\": false,\n            \"groups\": [],\n            \"user_permissions\": []\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Send Friend Request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI2OTcwMTIwLCJpYXQiOjE3MjY5NjkyMjAsImp0aSI6IjNlNTRjY2M3MjE0NDQ0NDM4OTdjZDI1OTVhYjYyMWY3IiwidXNlcl9pZCI6Ijc0YjE1MzgyLTc4NWUtMTFlZi1iMzYzLTAyNDJhYzFkMDAwNCJ9.vmEvce6FXWcZrgM-V18ozl1B9lgUmjYIqvrJJlI1lKE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"receiver_id\" : \"ec7a7d08-785e-11ef-b363-0242ac1d0004\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}accounts/api/users/v1/friend-request-api/",
+							"host": [
+								"{{host}}accounts"
+							],
+							"path": [
+								"api",
+								"users",
+								"v1",
+								"friend-request-api",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Error - Rate limit exceeded",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"receiver_id\" : \"9e380efc-785f-11ef-a87e-0242ac1d0004\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}accounts/api/users/v1/friend-request-api/",
+									"host": [
+										"{{host}}accounts"
+									],
+									"path": [
+										"api",
+										"users",
+										"v1",
+										"friend-request-api",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 21 Sep 2024 23:22:26 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.15"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, origin"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, PUT, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "100"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": {\n        \"non_field_errors\": [\n            \"Limit exceeded. You can only send 3 friend requests per minute.\"\n        ]\n    }\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"receiver_id\" : \"9e380efc-785f-11ef-a87e-0242ac1d0004\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}accounts/api/users/v1/friend-request-api/",
+									"host": [
+										"{{host}}accounts"
+									],
+									"path": [
+										"api",
+										"users",
+										"v1",
+										"friend-request-api",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 21 Sep 2024 23:23:26 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.15"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, origin"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, PUT, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "33"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Friend request sent\"\n}"
+						},
+						{
+							"name": "Error - rejection cooldown",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"receiver_id\" : \"9e380efc-785f-11ef-a87e-0242ac1d0004\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}accounts/api/users/v1/friend-request-api/",
+									"host": [
+										"{{host}}accounts"
+									],
+									"path": [
+										"api",
+										"users",
+										"v1",
+										"friend-request-api",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 21 Sep 2024 23:40:51 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.15"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, origin"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, PUT, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "104"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": {\n        \"non_field_errors\": [\n            \"You cannot send a friend request until the cooldown period is over.\"\n        ]\n    }\n}"
+						},
+						{
+							"name": "Error - user blocked",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"receiver_id\" : \"9e380efc-785f-11ef-a87e-0242ac1d0004\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}accounts/api/users/v1/friend-request-api/",
+									"host": [
+										"{{host}}accounts"
+									],
+									"path": [
+										"api",
+										"users",
+										"v1",
+										"friend-request-api",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 21 Sep 2024 23:51:32 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.15"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, origin"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, PUT, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "66"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": {\n        \"non_field_errors\": [\n            \"You are blocked by this user.\"\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Accept/Reject Friend Request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI2OTcwMzEwLCJpYXQiOjE3MjY5Njk0MTAsImp0aSI6Ijk1Yzk5M2IwMWFiODRkMDNhNjEwNzNmODAyMzc4ZTRlIiwidXNlcl9pZCI6ImVjN2E3ZDA4LTc4NWUtMTFlZi1iMzYzLTAyNDJhYzFkMDAwNCJ9.VjapGjPtrChNYnhBC_OG82lGOwnFBh7RD-zpr_3eQc0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"request_id\" : \"fa8264ae-7883-11ef-a13c-0242ac1d0004\",\r\n    \"status\" : \"ACCEPTED\"       // status enums : ACCEPTED, REJECTED\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}accounts/api/users/v1/friend-request-api/",
+							"host": [
+								"{{host}}accounts"
+							],
+							"path": [
+								"api",
+								"users",
+								"v1",
+								"friend-request-api",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Logs",
+			"item": [
+				{
+					"name": "Get logs - Only Admin access",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI2OTcwMTIwLCJpYXQiOjE3MjY5NjkyMjAsImp0aSI6IjNlNTRjY2M3MjE0NDQ0NDM4OTdjZDI1OTVhYjYyMWY3IiwidXNlcl9pZCI6Ijc0YjE1MzgyLTc4NWUtMTFlZi1iMzYzLTAyNDJhYzFkMDAwNCJ9.vmEvce6FXWcZrgM-V18ozl1B9lgUmjYIqvrJJlI1lKE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}accounts/api/generics/v1/log-list-api/",
+							"host": [
+								"{{host}}accounts"
+							],
+							"path": [
+								"api",
+								"generics",
+								"v1",
+								"log-list-api",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}accounts/api/generics/v1/log-list-api/",
+									"host": [
+										"{{host}}accounts"
+									],
+									"path": [
+										"api",
+										"generics",
+										"v1",
+										"log-list-api",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 22 Sep 2024 01:40:32 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.10.15"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, origin"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "3063"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"count\": 11,\n    \"next\": \"http://localhost:8000/accounts/api/generics/v1/log-list-api/?limit=10&offset=10\",\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": \"f57d984e-7882-11ef-a13c-0242ac1d0004\",\n            \"created_by_name\": \"Jon Bones\",\n            \"created_at\": \"2024-09-22T01:35:33.150943Z\",\n            \"updated_at\": \"2024-09-22T01:35:33.150973Z\",\n            \"message\": \"User blocked - Blocker : Jon Bones - Blocked : Jacob Satham\",\n            \"created_by\": \"9e380efc-785f-11ef-a87e-0242ac1d0004\"\n        },\n        {\n            \"id\": \"e4be4458-7874-11ef-bd60-0242ac1d0004\",\n            \"created_by_name\": \"Jon Bones\",\n            \"created_at\": \"2024-09-21T23:54:52.099215Z\",\n            \"updated_at\": \"2024-09-21T23:54:52.099252Z\",\n            \"message\": \"Friend request accepted - Sender : Jacob Satham - Reciever : Jon Bones\",\n            \"created_by\": \"9e380efc-785f-11ef-a87e-0242ac1d0004\"\n        },\n        {\n            \"id\": \"a7230e12-7874-11ef-bd60-0242ac1d0004\",\n            \"created_by_name\": \"Jacob Satham\",\n            \"created_at\": \"2024-09-21T23:53:08.740904Z\",\n            \"updated_at\": \"2024-09-21T23:53:08.740922Z\",\n            \"message\": \"Friend request sent - Sender : Jacob Satham - Reciever : Jon Bones\",\n            \"created_by\": \"74b15382-785e-11ef-b363-0242ac1d0004\"\n        },\n        {\n            \"id\": \"94f434e6-7874-11ef-bd60-0242ac1d0004\",\n            \"created_by_name\": \"Jon Bones\",\n            \"created_at\": \"2024-09-21T23:52:38.235073Z\",\n            \"updated_at\": \"2024-09-21T23:52:38.235093Z\",\n            \"message\": \"User Unblocked - Blocker : Jon Bones - Blocked : Jacob Satham\",\n            \"created_by\": \"9e380efc-785f-11ef-a87e-0242ac1d0004\"\n        },\n        {\n            \"id\": \"698549c6-7874-11ef-bd60-0242ac1d0004\",\n            \"created_by_name\": \"Jon Bones\",\n            \"created_at\": \"2024-09-21T23:51:25.365960Z\",\n            \"updated_at\": \"2024-09-21T23:51:25.365979Z\",\n            \"message\": \"User blocked - Blocker : Jon Bones - Blocked : Jacob Satham\",\n            \"created_by\": \"9e380efc-785f-11ef-a87e-0242ac1d0004\"\n        },\n        {\n            \"id\": \"669e29b4-7872-11ef-b85d-0242ac1d0004\",\n            \"created_by_name\": \"Jon Bones\",\n            \"created_at\": \"2024-09-21T23:37:01.502400Z\",\n            \"updated_at\": \"2024-09-21T23:37:01.502425Z\",\n            \"message\": \"Friend request rejected - Sender : Jacob Satham - Reciever : Jon Bones\",\n            \"created_by\": \"9e380efc-785f-11ef-a87e-0242ac1d0004\"\n        },\n        {\n            \"id\": \"80c0bcbe-7870-11ef-8692-0242ac1d0004\",\n            \"created_by_name\": \"Jacob Satham\",\n            \"created_at\": \"2024-09-21T23:23:26.356225Z\",\n            \"updated_at\": \"2024-09-21T23:23:26.356246Z\",\n            \"message\": \"Friend request sent - Sender : Jacob Satham - Reciever : Jon Bones\",\n            \"created_by\": \"74b15382-785e-11ef-b363-0242ac1d0004\"\n        },\n        {\n            \"id\": \"5c6b0c98-7870-11ef-8692-0242ac1d0004\",\n            \"created_by_name\": \"Jacob Satham\",\n            \"created_at\": \"2024-09-21T23:22:25.396655Z\",\n            \"updated_at\": \"2024-09-21T23:22:25.396681Z\",\n            \"message\": \"Friend request sent - Sender : Jacob Satham - Reciever : Jon Bones\",\n            \"created_by\": \"74b15382-785e-11ef-b363-0242ac1d0004\"\n        },\n        {\n            \"id\": \"5bde276a-7870-11ef-8692-0242ac1d0004\",\n            \"created_by_name\": \"Jacob Satham\",\n            \"created_at\": \"2024-09-21T23:22:24.473326Z\",\n            \"updated_at\": \"2024-09-21T23:22:24.473345Z\",\n            \"message\": \"Friend request sent - Sender : Jacob Satham - Reciever : Jon Bones\",\n            \"created_by\": \"74b15382-785e-11ef-b363-0242ac1d0004\"\n        },\n        {\n            \"id\": \"5b39b73e-7870-11ef-8692-0242ac1d0004\",\n            \"created_by_name\": \"Jacob Satham\",\n            \"created_at\": \"2024-09-21T23:22:23.395696Z\",\n            \"updated_at\": \"2024-09-21T23:22:23.395717Z\",\n            \"message\": \"Friend request sent - Sender : Jacob Satham - Reciever : Jon Bones\",\n            \"created_by\": \"74b15382-785e-11ef-b363-0242ac1d0004\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}

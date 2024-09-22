@@ -9,7 +9,7 @@ from .models import (
 
 @admin.register(UserModel)
 class UserModelAdmin(admin.ModelAdmin):
-    list_display = ('email', 'username', 'phone_number', 'role', 'is_active', 'is_verified', 'is_superuser')
+    list_display = ('id', 'email', 'username', 'role', 'is_active', 'is_verified', 'is_superuser')
     list_filter = ('is_active', 'is_verified', 'is_superuser', 'role')
     search_fields = ('email', 'username', 'phone_number')
 
@@ -21,12 +21,12 @@ class AccountsLoggingModelAdmin(admin.ModelAdmin):
 
 @admin.register(AccountsFriendRequestModel)
 class AccountsFriendRequestModelAdmin(admin.ModelAdmin):
-    list_display = ('sender', 'receiver', 'status', 'rejection_cooldown_date')
+    list_display = ('id', 'sender', 'receiver', 'status', 'rejection_cooldown_date')
     list_filter = ('status',)
     search_fields = ('sender__email', 'receiver__email')
 
 @admin.register(AccountsBlockedUserModel)
 class AccountsBlockedUserModelAdmin(admin.ModelAdmin):
-    list_display = ('blocker', 'blocked')
+    list_display = ('id', 'blocker', 'blocked')
     search_fields = ('blocker__email', 'blocked__email')
     list_filter = ('blocker', 'blocked')

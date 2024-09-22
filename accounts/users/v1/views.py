@@ -22,29 +22,31 @@ class AccountsUserListAPIView(generics.ListAPIView, ResponseMixin):
         logger, {"app_name": "AccountsUserListAPIView"}
     )
     queryset = get_user_model().objects.all()
-    filter_backends = [OrderingFilter]
-    ordering_fields = ['created_at']
-    ordering = ['-created_at']
     """
     API for getting users list
     """
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['request'] = self.request
+        return context
 
     def get_queryset(self):
         search_param = self.request.query_params.get('search', '').strip()
 
         if not search_param:
-            return get_user_model().objects.all()
+            return get_user_model().objects.all().order_by("-created_at")
 
         email_filter = Q(email__iexact=search_param)
         name_vector = SearchVector('username',)
         name_query = SearchQuery(search_param)
 
-        queryset = get_user_model().objects.filter(
-            email_filter | Q(search_vector=name_vector, search_query=name_query)
+        queryset = get_user_model().objects.annotate(search=name_vector).filter(
+            email_filter | Q(search=name_query)
         )
 
-        queryset = queryset.annotate(rank=SearchRank(name_vector, name_query)).order_by('-rank')
-        return queryset 
+        queryset = queryset.annotate(rank=SearchRank(name_vector, name_query)).order_by("-rank")
+        return queryset
 
     def list(self, request, *args, **kwargs):
         try:
@@ -153,6 +155,11 @@ class AccountsFriendsListAPIView(generics.ListAPIView, ResponseMixin):
     API for getting friends list
     """
 
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['request'] = self.request
+        return context
+
     def get_cache_key(self, user_id):
         return f"friends_list_{user_id}"
 
@@ -162,8 +169,8 @@ class AccountsFriendsListAPIView(generics.ListAPIView, ResponseMixin):
 
     def cache_friends_list(self, user, friends_list):
         key = self.get_cache_key(user.id)
-        # Caching the friends list for 2 minutes
-        cache.set(key, friends_list, 120)
+        # Caching the friends list for 1 minute
+        cache.set(key, friends_list, 60)
 
     def get_queryset(self):
         user = self.request.user
@@ -209,8 +216,10 @@ class AccountsPendingFriendRequestsAPIView(generics.ListAPIView, ResponseMixin):
 
     def get_queryset(self):
         user = self.request.user
-        queryset = AccountsFriendRequestModel.objects.filter(receiver=user, status='PENDING').order_by('-created_at')
-        return queryset
+        print(user)
+        queryset = AccountsFriendRequestModel.objects.filter(receiver=user, status='PENDING')
+        print(queryset)
+        return self.filter_queryset(queryset)
 
     def list(self, request, *args, **kwargs):
         try:

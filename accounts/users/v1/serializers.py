@@ -2,18 +2,40 @@ import datetime
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from django.db import transaction
+from django.db.models import Q
+from  django.core.cache import cache
 from accounts.models import AccountsBlockedUserModel, AccountsFriendRequestModel
 from accounts.users.v1.utils.friend_requests import can_send_friend_request, check_rate_limit, get_rejection_cooldown_period
 from core.utils.generic_utils import create_log
 
 class AccountsUserInfoSerializer(serializers.ModelSerializer):
+    email = serializers.SerializerMethodField()
+    username = serializers.SerializerMethodField()
+    """
+    For blocked users, real email and username will info will not be exposed.
+    """
     class Meta:
         model = get_user_model()
         exclude = ["password"]
 
+    def get_email(self, obj):
+        user = self.context["request"].user
+        if AccountsBlockedUserModel.objects.filter(
+            Q(blocked = obj) & Q(blocker = user) |
+            Q(blocked = user) & Q(blocker = obj)).exists():
+            return "-"
+        return obj.email
+
+    def get_username(self, obj):
+        user = self.context["request"].user
+        if AccountsBlockedUserModel.objects.filter(
+            Q(blocked = obj) & Q(blocker = user) |
+            Q(blocked = user) & Q(blocker = obj)).exists():
+            return "Blocked User"
+        return obj.username
 
 class AccountsSendFriendRequestSerializer(serializers.Serializer):
-    reciever_id = serializers.CharField(required=True)
+    receiver_id = serializers.CharField(required=True)
 
     def validate(self, attrs):
         request = self.context["request"]
@@ -72,9 +94,10 @@ class AccountsUpdateFriendRequestSerializer(serializers.Serializer):
                     msg=f"Friend request accepted - Sender : {friend_request.sender.username} - Reciever : {friend_request.receiver.username}",
                     user=request.user
                 )
+                cache.clear()
             elif status == "REJECTED":
                 friend_request.status = 'REJECTED'
-                friend_request.rejection_cooldown_date = datetime.datetime().now() + get_rejection_cooldown_period()
+                friend_request.rejection_cooldown_date = datetime.datetime.now() + get_rejection_cooldown_period()
                 friend_request.save(update_fields=['status', 'rejection_cooldown_date'])
                 validated_data["success_msg"] = "Friend request rejected"
                 create_log(

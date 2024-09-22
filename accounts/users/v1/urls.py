@@ -25,7 +25,7 @@ urlpatterns = [
     ),
     path(
         "pending-friends-requests-api/",
-        views.AccountsFriendsListAPIView.as_view(),
-        name="AccountsFriendsListAPIView"
+        views.AccountsPendingFriendRequestsAPIView.as_view(),
+        name="AccountsPendingFriendRequestsAPIView"
     )
 ]

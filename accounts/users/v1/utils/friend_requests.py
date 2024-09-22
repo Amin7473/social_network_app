@@ -1,10 +1,11 @@
 import datetime
 from django.core.cache import cache
+from django.db.models import Q
 
 from accounts.models import AccountsBlockedUserModel, AccountsFriendRequestModel
 
 def get_rejection_cooldown_period():
-        return datetime.timedelta(hours=24)
+    return datetime.timedelta(hours=24)
 
 def rate_limit_key(user_id):
     return f"friend_request_sender_{user_id}"
@@ -31,5 +32,20 @@ def can_send_friend_request(sender, receiver):
     ).first()
     if cooldown_request:
         return False, "You cannot send a friend request until the cooldown period is over."
-    
+
+    already_sent = AccountsFriendRequestModel.objects.filter(
+        sender=sender,
+        receiver=receiver,
+        status='PENDING',
+    ).first()
+    if already_sent:
+        return False, "Request has already been sent"
+
+    already_friends = AccountsFriendRequestModel.objects.filter(
+        Q(sender=sender) & Q(receiver=receiver) |
+        Q(sender=receiver) & Q(receiver=sender),
+        status='ACCEPTED',
+    ).first()
+    if already_friends:
+        return False, "You are already friends with this user"
     return True, None

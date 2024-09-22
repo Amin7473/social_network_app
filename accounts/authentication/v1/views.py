@@ -1,6 +1,7 @@
 import logging
 from rest_framework import views, permissions
-from accounts.authentication.v1.serializers import AccountsUserRegistrationSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+from accounts.authentication.v1.serializers import AccountsLoginSerializer, AccountsUserRegistrationSerializer
 from core.settings import logger
 from core.utils.generic_mixins import ResponseMixin
 
@@ -29,3 +30,6 @@ class AccountsUserRegistrationAPIView(views.APIView, ResponseMixin):
         except Exception as e:
             self.api_logger.info(f"AccountsUserRegistrationAPIView POST, {str(e)}")
             return self.error_response(data=str(e))
+
+class AccountsLoginAPIView(TokenObtainPairView):
+    serializer_class = AccountsLoginSerializer

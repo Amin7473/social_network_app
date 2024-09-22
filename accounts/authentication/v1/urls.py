@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from accounts.authentication.v1 import views
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
     path(
@@ -11,8 +11,8 @@ urlpatterns = [
     ),
     path(
         "user-login-api/",
-        TokenObtainPairView.as_view(),
-        name="TokenObtainPairView"
+        views.AccountsLoginAPIView.as_view(),
+        name="AccountsLoginAPIView"
     ),
     path(
         "user-token-refresh-api/",
